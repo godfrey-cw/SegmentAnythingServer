@@ -3,12 +3,12 @@
 sudo apt update && sudo apt upgrade;
 
 # install torchserve + dependencies
-cd ~/samserve/serve;
+cd ~/SegmentAnythingServer/serve;
 python ts_scripts/install_dependencies.py --cuda=cu117; # vm actually has 12.0 ...
 pip install torchserve torch-model-archiver torch-workflow-archiver;
 
 # install segment-anything
-cd ~/samserve/segment-anything;
+cd ~/SegmentAnythingServer/segment-anything;
 pip install -e .;
 
 # make model archive file
@@ -22,8 +22,8 @@ for m in {'sam_b','sam_l','sam_h'}; do
     for h in {'auto_maskgen','predict'}; do
         torch-model-archiver --model-name $m'_'$h \
             --serialized-file 'samweights/'$m'.pth' \
-            --model-file 'samserve/models/'$m'.py' \
-            --handler 'samserve/handlers/'$h'.py' \
+            --model-file 'SegmentAnythingServer/models/'$m'.py' \
+            --handler 'SegmentAnythingServer/handlers/'$h'.py' \
             --export-path models -v 0.1 -f;
     done;
 done
@@ -36,8 +36,8 @@ done
 
 # launch torchserve
 cd ~;
-torchserve --model-store models --start --models all --ts-config samserve/config.properties --no-config-snapshots;
+torchserve --model-store models --start --models all --ts-config SegmentAnythingServer/config.properties --no-config-snapshots;
 # if you want specific models, e.g. only the _h ones:
 # torchserve --model-store models --start \
 #     --models sam_h_auto_maskgen=sam_h_auto_maskgen.mar sam_h_predict=sam_h_predict.mar  \
-#     --ts-config samserve/config.properties --no-config-snapshots;
+#     --ts-config SegmentAnythingServer/config.properties --no-config-snapshots;
