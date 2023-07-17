@@ -8,7 +8,14 @@ Recursively clone this repository with
 git clone --recursive https://github.com/godfrey-cw/SegmentAnythingServer.git
 ```
 
-Then run
+Then check out the Bash script executed below. It was developed on an Ubuntu
+20.04 VM (specifically a [Lambda Labs](https://lambdalabs.com/) A10 instance).
+If your setup is different you may need to make some changes. In particular I
+**do not recommend running this Bash script on your laptop/desktop** as is (it
+will install a bunch of packages with `apt`, polute your system Python
+environment ... not good).
+
+Anyway, once you are comfortable run
 
 ```bash
 bash SegmentAnythingServer/serve.sh
