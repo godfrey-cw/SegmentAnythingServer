@@ -1,0 +1,6 @@
+[submodule "serve"]
+	path = serve
+	url = https://github.com/godfrey-cw/serve.git
+[submodule "segment-anything"]
+	path = segment-anything
+	url = https://github.com/facebookresearch/segment-anything.git
