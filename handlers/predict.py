@@ -1,14 +1,9 @@
-from segment_anything import SamPredictor, SamAutomaticMaskGenerator
+from segment_anything import SamPredictor
 from ts.torch_handler.base_handler import BaseHandler
 import torch
 import base64
 import io
-from abc import ABC
-
-import torch
 from PIL import Image
-
-from torchvision import transforms as T
 import numpy as np
 import pickle as pkl
 
